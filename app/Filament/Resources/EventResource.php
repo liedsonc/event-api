@@ -8,6 +8,10 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -97,7 +101,7 @@ class EventResource extends Resource
                 Forms\Components\Section::make('Event Team')
                     ->schema([
                         Forms\Components\Repeater::make('event_users')
-                            ->relationship('assignedUsers')
+                            ->relationship('eventUsers')
                             ->schema([
                                 Forms\Components\Select::make('user_id')
                                     ->label('User')
@@ -119,6 +123,8 @@ class EventResource extends Resource
                                 Forms\Components\Toggle::make('can_view_tickets')
                                     ->label('Can View Tickets')
                                     ->default(false),
+                                Forms\Components\Hidden::make('assigned_at')
+                                    ->default(now()),
                             ])
                             ->columns(3)
                             ->defaultItems(0)
@@ -199,4 +205,4 @@ class EventResource extends Resource
             'edit' => Pages\EditEvent::route('/{record}/edit'),
         ];
     }
-} 
+}

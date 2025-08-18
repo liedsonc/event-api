@@ -50,7 +50,6 @@ class EventOwnerPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
                 'event-owner',
-                'post-login-redirect',
             ])
             ->authMiddleware([
                 Authenticate::class,

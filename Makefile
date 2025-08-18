@@ -12,6 +12,7 @@ help:
 	@echo "  make restart     - Restart all containers"
 	@echo "  make logs        - Show logs from all containers"
 	@echo "  make shell       - Access Laravel container shell"
+	@echo "  make api         - Access Laravel container shell (alias for shell)"
 	@echo "  make mysql       - Access MySQL container shell"
 	@echo "  make redis       - Access Redis container shell"
 	@echo "  make meilisearch - Access Meilisearch container shell"
@@ -49,6 +50,10 @@ logs:
 
 # Access Laravel container shell
 shell:
+	docker-compose exec laravel.test bash
+
+# Access Laravel container shell (alias for shell)
+api:
 	docker-compose exec laravel.test bash
 
 # Access MySQL container shell

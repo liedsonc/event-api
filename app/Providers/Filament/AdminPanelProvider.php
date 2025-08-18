@@ -51,7 +51,6 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
                 'admin',
-                'post-login-redirect',
             ])
             ->authMiddleware([
                 Authenticate::class,

@@ -11,7 +11,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Hash;
 
-class UserResource extends Resource
+class GUserResource extends Resource
 {
     protected static ?string $model = User::class;
 
@@ -108,7 +108,7 @@ class UserResource extends Resource
                             ->label('Select Roles'),
                     ])
                     ->action(function (User $record, array $data): void {
-                        $record->roles()->sync($data['roles']);
+                        $record->roles()->sync($data['role']);
                     }),
                 Tables\Actions\DeleteAction::make(),
             ])
@@ -134,4 +134,4 @@ class UserResource extends Resource
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
-} 
+}
