@@ -50,6 +50,12 @@ class UserRelationshipSeeder extends Seeder
                 $userData
             );
 
+            // Assign event_owner role to test users so they can access the event owner panel
+            $eventOwnerRole = \App\Models\Role::where('name', 'event_owner')->first();
+            if ($eventOwnerRole) {
+                $user->roles()->sync([$eventOwnerRole->id]);
+            }
+
             // Create relationship between event owner and test user
             UserRelationship::firstOrCreate(
                 [

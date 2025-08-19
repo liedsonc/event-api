@@ -13,16 +13,34 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // First create the roles
         $this->call([
             RoleSeeder::class,
             UserRelationshipSeeder::class,
         ]);
 
-        // User::factory(10)->create();
+        // Create an admin user
+        $adminUser = User::firstOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name' => 'Admin User',
+                'email' => 'admin@example.com',
+                'password' => bcrypt('password'),
+            ]
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Assign admin role
+        $adminRole = \App\Models\Role::where('name', 'admin')->first();
+        if ($adminRole) {
+            $adminUser->roles()->sync([$adminRole->id]);
+        }
+
+        // Create some additional test users with factory
+        // User::factory(5)->create();
+
+        $this->command->info('Database seeded successfully!');
+        $this->command->info('Admin user: admin@example.com / password');
+        $this->command->info('Event owner: eventowner@example.com / password');
+        $this->command->info('Test users: testuser1@example.com, testuser2@example.com, testuser3@example.com / password');
     }
 }
